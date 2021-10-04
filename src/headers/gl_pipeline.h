@@ -6,12 +6,14 @@
 
 class GLPipeline {
 	private:
-		set<GLObject*> objects;
+		std::set<GLObject*> objects;
 	public:
-		void add(GLObject* obj);
-		void remove(GLObject* obj);
+		virtual void remove(GLObject* obj);
+		virtual void add(GLObject* obj);
+		virtual void process();
 
-		virtual void process() {};
+	protected:
+		virtual void processObject(GLObject* obj) {};
 };
 
 

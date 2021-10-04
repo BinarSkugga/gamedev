@@ -7,3 +7,11 @@ void GLPipeline::add(GLObject* obj) {
 void GLPipeline::remove(GLObject* obj) {
 	this->objects.erase(obj);
 }
+
+void GLPipeline::process() {
+	for(GLObject* obj : this->objects) {
+		obj->init();
+		this->processObject(obj);
+		obj->destroy();
+	}
+}
