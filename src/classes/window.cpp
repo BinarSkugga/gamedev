@@ -6,7 +6,7 @@ Window::Window(const char* title) {
 	this->title = title;
 }
 
-GLFWwindow* Window::getWindow() {
+GLFWwindow* Window::getGLFW() {
 	return this->window;
 }
 
@@ -15,6 +15,7 @@ void Window::init() {
 
 	this->window = glfwCreateWindow(this->width, this->height, this->title, NULL, NULL);
 	glfwMakeContextCurrent(this->window);
+	glfwSwapInterval(0);
 }
 
 void Window::destroy() {
@@ -23,5 +24,5 @@ void Window::destroy() {
 }
 
 Window::~Window() {
-	delete[] this->title;
+	delete this->title;
 }

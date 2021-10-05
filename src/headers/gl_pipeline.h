@@ -13,7 +13,7 @@ class GLPipeline {
 		virtual void process();
 
 	protected:
-		virtual void processObject(GLObject* obj) {};
+		virtual void processObject(GLObject* obj) = 0;
 };
 
 

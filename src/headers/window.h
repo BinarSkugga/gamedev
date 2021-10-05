@@ -11,9 +11,9 @@ class Window : public GLObject {
 
 	public:
 		explicit Window(const char* title);
-		~Window();
+		virtual ~Window();
 
-		GLFWwindow* getWindow();
+		GLFWwindow* getGLFW();
 
 	protected:
 		void init() override;
