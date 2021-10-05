@@ -15,6 +15,7 @@ class Window : public GLObject {
 
 		const char* getTitle();
 		GLFWwindow* getGLFW();
+		bool isFocused() const;
 
 	protected:
 		void init() override;

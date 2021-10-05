@@ -5,9 +5,7 @@
 
 using namespace std;
 
-Clock::Clock(int maxFPS) {
-	this->maxFPS = maxFPS;
-	this->timePerFrame = 1.0 / this->maxFPS;
+Clock::Clock() {
 	this->tikTime = glfwGetTime();
 }
 
@@ -27,12 +25,13 @@ bool Clock::isCompletedSecond() const {
 	return this->completedSecond;
 }
 
-void Clock::update() {
+void Clock::update(int fpsCap) {
 	this->completedSecond = false;
 
+	double timePerFrame = 1.0 / fpsCap;
 	double frameTime = glfwGetTime();
 	double deltaTime = frameTime - this->tikTime;
-	double remainingTime = this->timePerFrame - deltaTime;
+	double remainingTime = timePerFrame - deltaTime;
 	this_thread::sleep_for(chrono::microseconds((long)(remainingTime * 1000000)));
 
 	this->runningFPS++;

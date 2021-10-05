@@ -14,6 +14,10 @@ const char* Window::getTitle() {
 	return this->title;
 }
 
+bool Window::isFocused() const {
+	return glfwGetWindowAttrib(this->window, GLFW_FOCUSED);
+}
+
 void Window::init() {
 	glfwInit();
 

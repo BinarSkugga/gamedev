@@ -7,6 +7,8 @@ void WindowPipeline::processObject(GLObject *obj) {
 	GLFWwindow* glwin = window->getGLFW();
 
 	Clock clock = Clock();
+	int fpsCap;
+
 	while(!glfwWindowShouldClose(glwin)) {
 		glfwSwapBuffers(glwin);
 		glfwPollEvents();
@@ -18,6 +20,8 @@ void WindowPipeline::processObject(GLObject *obj) {
 			fullTitle += " - " + std::to_string(clock.getFPS()) + "fps, " + std::to_string(clock.getDeltaMS()) + "ms";
 			glfwSetWindowTitle(glwin, fullTitle.c_str());
 		}
-		clock.update();
+
+		fpsCap = window->isFocused() ? 120 : 24;
+		clock.update(fpsCap);
 	}
 }
