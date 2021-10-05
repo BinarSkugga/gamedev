@@ -16,9 +16,8 @@ void WindowPipeline::processObject(GLObject *obj) {
 		// Render stuff here
 
 		if(clock.isCompletedSecond()) {
-			std::string fullTitle = window->getTitle();
-			fullTitle += " - " + std::to_string(clock.getFPS()) + "fps, " + std::to_string(clock.getDeltaMS()) + "ms";
-			glfwSetWindowTitle(glwin, fullTitle.c_str());
+			std::string subtitle = std::to_string(clock.getFPS()) + "fps, " + std::to_string(clock.getDeltaMS()) + "ms";
+			window->setSubtitle(subtitle.c_str());
 		}
 
 		fpsCap = window->isFocused() ? 120 : 24;

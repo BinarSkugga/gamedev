@@ -17,6 +17,8 @@ class Window : public GLObject {
 		GLFWwindow* getGLFW();
 		bool isFocused() const;
 
+		void setSubtitle(const char* subtitle);
+
 	protected:
 		void init() override;
 		void destroy() override;

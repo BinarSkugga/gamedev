@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include "window.h"
 
 
@@ -16,6 +17,18 @@ const char* Window::getTitle() {
 
 bool Window::isFocused() const {
 	return glfwGetWindowAttrib(this->window, GLFW_FOCUSED);
+}
+
+void Window::setSubtitle(const char* subtitle) {
+	if(strlen(this->title) + strlen(subtitle) + 4 > 255)
+		throw std::invalid_argument("Window's full title can't be longer than 255 characters.");
+
+	char fullTitle[255];
+	strcpy(fullTitle, this->title);
+	strcat(fullTitle, " - ");
+	strcat(fullTitle, subtitle);
+
+	glfwSetWindowTitle(this->window, fullTitle);
 }
 
 void Window::init() {
