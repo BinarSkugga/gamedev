@@ -2,7 +2,6 @@
 #include <thread>
 #include <GLFW/glfw3.h>
 #include <clock.h>
-#include <iostream>
 
 using namespace std;
 
@@ -24,7 +23,13 @@ double Clock::getDeltaMS() const {
 	return this->delta * 1000;
 }
 
+bool Clock::isCompletedSecond() const {
+	return this->completedSecond;
+}
+
 void Clock::update() {
+	this->completedSecond = false;
+
 	double frameTime = glfwGetTime();
 	double deltaTime = frameTime - this->tikTime;
 	double remainingTime = this->timePerFrame - deltaTime;
@@ -38,8 +43,7 @@ void Clock::update() {
 		this->FPS = this->runningFPS;
 		this->runningFPS = 0;
 		this->runningTime = 1.0 - this->runningTime;
-
-		std::cout << this->getFPS() << ", " << this->getDeltaMS() << "ms" << std::endl;
+		this->completedSecond = true;
 	}
 
 	this->tikTime = glfwGetTime();

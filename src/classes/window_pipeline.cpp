@@ -6,13 +6,18 @@ void WindowPipeline::processObject(GLObject *obj) {
 	Window* window = dynamic_cast<Window*>(obj);
 	GLFWwindow* glwin = window->getGLFW();
 
-	Clock* clock = new Clock();
+	Clock clock = Clock();
 	while(!glfwWindowShouldClose(glwin)) {
 		glfwSwapBuffers(glwin);
 		glfwPollEvents();
 
 		// Render stuff here
 
-		clock->update();
+		if(clock.isCompletedSecond()) {
+			std::string fullTitle = window->getTitle();
+			fullTitle += " - " + std::to_string(clock.getFPS()) + "fps, " + std::to_string(clock.getDeltaMS()) + "ms";
+			glfwSetWindowTitle(glwin, fullTitle.c_str());
+		}
+		clock.update();
 	}
 }

@@ -10,6 +10,10 @@ GLFWwindow* Window::getGLFW() {
 	return this->window;
 }
 
+const char* Window::getTitle() {
+	return this->title;
+}
+
 void Window::init() {
 	glfwInit();
 

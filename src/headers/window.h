@@ -13,6 +13,7 @@ class Window : public GLObject {
 		explicit Window(const char* title);
 		virtual ~Window();
 
+		const char* getTitle();
 		GLFWwindow* getGLFW();
 
 	protected:

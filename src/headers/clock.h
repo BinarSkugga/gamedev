@@ -13,12 +13,16 @@ class Clock {
 
 		double tikTime{};
 
+		bool completedSecond{false};
+
 	public:
 		explicit Clock(int maxFPS = 120);
 
 		int getFPS() const;
 		double getDelta() const;
 		double getDeltaMS() const;
+		bool isCompletedSecond() const;
+
 		void update();
 };
 
