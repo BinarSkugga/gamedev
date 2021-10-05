@@ -11,10 +11,6 @@ GLFWwindow* Window::getGLFW() {
 	return this->window;
 }
 
-const char* Window::getTitle() {
-	return this->title;
-}
-
 bool Window::isFocused() const {
 	return glfwGetWindowAttrib(this->window, GLFW_FOCUSED);
 }
@@ -33,9 +29,13 @@ void Window::setSubtitle(const char* subtitle) {
 
 void Window::init() {
 	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
 	this->window = glfwCreateWindow(this->width, this->height, this->title, NULL, NULL);
+
 	glfwMakeContextCurrent(this->window);
+	glViewport(0, 0, this->width, this->height);
 	glfwSwapInterval(0);
 }
 

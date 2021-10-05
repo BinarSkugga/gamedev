@@ -1,26 +1,43 @@
-#include <window_pipeline.h>
-#include <gl_object.h>
+#include <iostream>
 #include <clock.h>
+
+#include <GLFW/glfw3.h>
+#include <gl_object.h>
+#include <window.h>
+#include <window_pipeline.h>
+#include <keyboard_pipeline.h>
+#include <key.h>
 
 void WindowPipeline::processObject(GLObject *obj) {
 	Window* window = dynamic_cast<Window*>(obj);
 	GLFWwindow* glwin = window->getGLFW();
 
-	Clock clock = Clock();
-	int fpsCap;
+	KeyboardPipeline* kpl = new KeyboardPipeline();
+	Key wKey = Key(glwin, GLFW_KEY_W);
+	Key aKey = Key(glwin, GLFW_KEY_A);
+	Key sKey = Key(glwin, GLFW_KEY_S);
+	Key dKey = Key(glwin, GLFW_KEY_D);
 
+	kpl->add(&wKey);
+	kpl->add(&aKey);
+	kpl->add(&sKey);
+	kpl->add(&dKey);
+
+	Clock clock = Clock();
 	while(!glfwWindowShouldClose(glwin)) {
-		glfwSwapBuffers(glwin);
-		glfwPollEvents();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		kpl->process();
 
 		// Render stuff here
+
+		glfwSwapBuffers(glwin);
+		glfwPollEvents();
 
 		if(clock.isCompletedSecond()) {
 			std::string subtitle = std::to_string(clock.getFPS()) + "fps, " + std::to_string(clock.getDeltaMS()) + "ms";
 			window->setSubtitle(subtitle.c_str());
 		}
 
-		fpsCap = window->isFocused() ? 120 : 24;
-		clock.update(fpsCap);
+		clock.update(window->isFocused() ? 120 : 24);
 	}
 }
