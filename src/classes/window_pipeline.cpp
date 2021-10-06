@@ -1,4 +1,3 @@
-#include <iostream>
 #include <clock.h>
 
 #include <GLFW/glfw3.h>
@@ -26,12 +25,12 @@ void WindowPipeline::processObject(GLObject *obj) {
 	Clock clock = Clock();
 	while(!glfwWindowShouldClose(glwin)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		kpl->process();
 
 		// Render stuff here
 
 		glfwSwapBuffers(glwin);
 		glfwPollEvents();
+		kpl->process();
 
 		if(clock.isCompletedSecond()) {
 			std::string subtitle = std::to_string(clock.getFPS()) + "fps, " + std::to_string(clock.getDeltaMS()) + "ms";
