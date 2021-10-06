@@ -30,7 +30,7 @@ void WindowPipeline::processObject(GLObject *obj) {
 
 		glfwSwapBuffers(glwin);
 		glfwPollEvents();
-		kpl->process();
+		kpl->process(true);
 
 		if(clock.isCompletedSecond()) {
 			std::string subtitle = std::to_string(clock.getFPS()) + "fps, " + std::to_string(clock.getDeltaMS()) + "ms";

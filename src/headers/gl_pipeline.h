@@ -10,7 +10,7 @@ class GLPipeline {
 	public:
 		void remove(GLObject* obj);
 		void add(GLObject* obj);
-		void process();
+		void process(bool parallel = false);
 
 	protected:
 		virtual void processObject(GLObject* obj) = 0;

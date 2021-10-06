@@ -16,4 +16,4 @@ file(GLOB_RECURSE classes ${SRC}/*.cpp)
 include_directories(${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} GLFW ${SRC}/headers ${SRC}/classes)
 
 add_executable(gamedev ${classes})
-target_link_libraries(gamedev ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} glfw)
+target_link_libraries(gamedev ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} glfw tbb)
