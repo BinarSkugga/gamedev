@@ -15,7 +15,7 @@ class Key : public GLObject {
 	private:
 		GLFWwindow* window;
 		int code;
-		int state{0};
+		int state{IDLE};
 
 		double lastPress{0.0};
 		double lastRelease{0.0};
