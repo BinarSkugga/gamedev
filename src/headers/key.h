@@ -30,6 +30,8 @@ class Key : public GLObject {
 		bool isIdle() const;
 		bool isPressed() const;
 		bool isReleased() const;
+		bool isHeld() const;
+		bool isDoublePressed() const;
 
 	protected:
 		void init() override;

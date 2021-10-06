@@ -19,15 +19,23 @@ double Key::getHeldTime() const {
 }
 
 bool Key::isIdle() const {
-	return this->state == 0;
+	return this->state == IDLE;
 }
 
 bool Key::isPressed() const {
-	return this->state == 1;
+	return this->state == PRESSED;
 }
 
 bool Key::isReleased() const {
-	return this->state == -1;
+	return this->state == RELEASED;
+}
+
+bool Key::isHeld() const {
+	return this->state == HELD;
+}
+
+bool Key::isDoublePressed() const {
+	return this->state == DOUBLE_PRESSED;
 }
 
 void Key::init() {
