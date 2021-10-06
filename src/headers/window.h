@@ -20,5 +20,5 @@ class Window : public GLObject {
 
 	protected:
 		void init() override;
-		void destroy() override;
+		void clean() override;
 };

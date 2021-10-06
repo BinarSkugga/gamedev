@@ -1,4 +1,5 @@
 #include <execution>
+#include <cstdarg>
 
 #include "gl_pipeline.h"
 
@@ -6,8 +7,18 @@ void GLPipeline::add(GLObject* obj) {
 	this->objects.insert(obj);
 }
 
+void GLPipeline::add(std::initializer_list<GLObject*> objs) {
+	for(GLObject* obj : objs)
+		this->add(obj);
+}
+
 void GLPipeline::remove(GLObject* obj) {
 	this->objects.erase(obj);
+}
+
+void GLPipeline::remove(std::initializer_list<GLObject*> objs) {
+	for(GLObject* obj : objs)
+		this->remove(obj);
 }
 
 void GLPipeline::process(bool parallel) {
@@ -19,14 +30,14 @@ void GLPipeline::process(bool parallel) {
 				[this](GLObject* obj) {
 					obj->init();
 					this->processObject(obj);
-					obj->destroy();
+					obj->clean();
 				}
 		);
 	} else {
 		for(GLObject* obj : this->objects) {
 			obj->init();
 			this->processObject(obj);
-			obj->destroy();
+			obj->clean();
 		}
 	}
 }

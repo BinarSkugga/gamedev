@@ -8,7 +8,6 @@ const int RELEASED = -1;
 const int IDLE = 0;
 const int PRESSED = 1;
 const int HELD = 2;
-const int DOUBLE_PRESSED = 3;
 
 
 class Key : public GLObject {
@@ -17,6 +16,7 @@ class Key : public GLObject {
 		int code;
 		int state{IDLE};
 
+		int consecutiveHit{1};
 		double lastPress{0.0};
 		double lastRelease{0.0};
 
@@ -25,15 +25,15 @@ class Key : public GLObject {
 
 		int getGLFWState() const;
 		int getKeyState() const;
+		int getConsecutiveHit() const;
 		double getHeldTime() const;
 
 		bool isIdle() const;
-		bool isPressed() const;
+		bool isPressed(int consecutive = 1) const;
 		bool isReleased() const;
 		bool isHeld() const;
-		bool isDoublePressed() const;
 
 	protected:
 		void init() override;
-		void destroy() override;
+		void clean() override;
 };

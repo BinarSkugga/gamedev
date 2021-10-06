@@ -10,6 +10,10 @@ int Key::getKeyState() const {
 	return this->state;
 }
 
+int Key::getConsecutiveHit() const {
+	return this->consecutiveHit;
+}
+
 int Key::getGLFWState() const {
 	return glfwGetKey(this->window, this->code);
 }
@@ -22,8 +26,8 @@ bool Key::isIdle() const {
 	return this->state == IDLE;
 }
 
-bool Key::isPressed() const {
-	return this->state == PRESSED;
+bool Key::isPressed(int consecutive) const {
+	return this->state == PRESSED and this->consecutiveHit == consecutive;
 }
 
 bool Key::isReleased() const {
@@ -34,17 +38,13 @@ bool Key::isHeld() const {
 	return this->state == HELD;
 }
 
-bool Key::isDoublePressed() const {
-	return this->state == DOUBLE_PRESSED;
-}
-
 void Key::init() {
 	int current_state = this->getGLFWState();
 
 	bool handled{false};
 	if(current_state == IDLE) {
 		// Key is currently idle but was pressed in the previous frame
-		if(this->state == PRESSED or this->state == DOUBLE_PRESSED or this->state == HELD) {
+		if(this->state == PRESSED or this->state == HELD) {
 			this->state = RELEASED;
 			this->lastRelease = glfwGetTime();
 			handled = true;
@@ -54,13 +54,16 @@ void Key::init() {
 		if(this->state == IDLE or this->state == RELEASED) {
 			// Key was released less than 300ms ago
 			if(glfwGetTime() - this->lastRelease < 0.3) {
-				this->state = DOUBLE_PRESSED;
+				this->state = PRESSED;
+				this->consecutiveHit += 1;
 				this->lastPress = glfwGetTime();
 				this->lastRelease = 0.0;
 				handled = true;
+			} else {
+				this->consecutiveHit = 1;
 			}
 		// Key is currently pressed and stayed pressed
-		} else if(this->state == PRESSED or this->state == DOUBLE_PRESSED or this->state == HELD) {
+		} else if(this->state == PRESSED or this->state == HELD) {
 			this->state = HELD;
 			handled = true;
 		}
@@ -74,6 +77,6 @@ void Key::init() {
 	}
 }
 
-void Key::destroy() {
+void Key::clean() {
 
 }

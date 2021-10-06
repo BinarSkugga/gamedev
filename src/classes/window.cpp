@@ -31,6 +31,7 @@ void Window::init() {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	this->window = glfwCreateWindow(this->width, this->height, this->title, NULL, NULL);
 
@@ -39,11 +40,12 @@ void Window::init() {
 	glfwSwapInterval(0);
 }
 
-void Window::destroy() {
-	glfwDestroyWindow(this->window);
-	glfwTerminate();
+void Window::clean() {
+
 }
 
 Window::~Window() {
 	delete this->title;
+	glfwDestroyWindow(this->window);
+	glfwTerminate();
 }

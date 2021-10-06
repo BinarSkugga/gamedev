@@ -11,16 +11,16 @@ void WindowPipeline::processObject(GLObject *obj) {
 	Window* window = dynamic_cast<Window*>(obj);
 	GLFWwindow* glwin = window->getGLFW();
 
-	KeyboardPipeline* kpl = new KeyboardPipeline();
-	Key wKey = Key(glwin, GLFW_KEY_W);
-	Key aKey = Key(glwin, GLFW_KEY_A);
-	Key sKey = Key(glwin, GLFW_KEY_S);
-	Key dKey = Key(glwin, GLFW_KEY_D);
+	KeyboardPipeline kpl = KeyboardPipeline();
+	Key* wKey = new Key(glwin, GLFW_KEY_W);
+	Key* aKey = new Key(glwin, GLFW_KEY_A);
+	Key* sKey = new Key(glwin, GLFW_KEY_S);
+	Key* dKey = new Key(glwin, GLFW_KEY_D);
 
-	kpl->add(&wKey);
-	kpl->add(&aKey);
-	kpl->add(&sKey);
-	kpl->add(&dKey);
+	kpl.add(wKey);
+	kpl.add(aKey);
+	kpl.add(sKey);
+	kpl.add(dKey);
 
 	Clock clock = Clock();
 	while(!glfwWindowShouldClose(glwin)) {
@@ -30,7 +30,7 @@ void WindowPipeline::processObject(GLObject *obj) {
 
 		glfwSwapBuffers(glwin);
 		glfwPollEvents();
-		kpl->process(true);
+		kpl.process(true);
 
 		if(clock.isCompletedSecond()) {
 			std::string subtitle = std::to_string(clock.getFPS()) + "fps, " + std::to_string(clock.getDeltaMS()) + "ms";
