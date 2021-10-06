@@ -2,7 +2,7 @@
 #include <window_pipeline.h>
 
 int main() {
-    Window w = Window("My Game");
+	Window w = Window("My Game");
 	WindowPipeline wpl = WindowPipeline();
 
 	wpl.add(&w);
