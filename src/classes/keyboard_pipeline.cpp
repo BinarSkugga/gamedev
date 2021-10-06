@@ -9,7 +9,7 @@ void KeyboardPipeline::processObject(GLObject* obj) {
 
 	if(key->isReleased())
 		std::cout << "Released, held for " << key->getHeldTime() << "s !\n";
-	if(key->isPressed())
+	if(key->isPressed(0))
 		std::cout << "Pressed (" << key->getConsecutiveHit() << ") !\n";
 	if(key->isPressed(2))
 		std::cout << "Double pressed !\n";

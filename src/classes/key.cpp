@@ -27,6 +27,8 @@ bool Key::isIdle() const {
 }
 
 bool Key::isPressed(int consecutive) const {
+	if(consecutive == 0)
+		return this->state == PRESSED;
 	return this->state == PRESSED and this->consecutiveHit == consecutive;
 }
 

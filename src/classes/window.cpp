@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-#include "window.h"
+#include <window.h>
 
 
 Window::Window(const char* title) {
@@ -33,7 +33,7 @@ void Window::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-	this->window = glfwCreateWindow(this->width, this->height, this->title, NULL, NULL);
+	this->window = glfwCreateWindow(this->width, this->height, this->title, nullptr, nullptr);
 
 	glfwMakeContextCurrent(this->window);
 	glViewport(0, 0, this->width, this->height);
