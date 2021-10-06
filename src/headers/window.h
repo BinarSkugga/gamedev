@@ -5,7 +5,7 @@
 
 class Window : public GLObject {
 	private:
-		const int width{1280}, height{720};
+		int width{1280}, height{720};
 		const char* title;
 		GLFWwindow* window{};
 

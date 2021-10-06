@@ -6,5 +6,12 @@
 void KeyboardPipeline::processObject(GLObject* obj) {
 	Key* key = dynamic_cast<Key*>(obj);
 
-	std::cout << key->getKeyState() << std::endl;
+	if(key->getKeyState() == -1)
+		std::cout << "Released, held for " << key->getHeldTime() << "s !" << std::endl;
+
+	if(key->getKeyState() == 1)
+		std::cout << "Pressed !" << std::endl;
+
+	if(key->getKeyState() == 3)
+		std::cout << "Double pressed !" << std::endl;
 }
