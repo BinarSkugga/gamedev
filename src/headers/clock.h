@@ -1,7 +1,9 @@
 #pragma once
 
 
-class Clock {
+#include <bus/bus_subscriber.h>
+
+class Clock : public BusSubscriber {
 	private:
 		unsigned short FPS{0};
 		unsigned short runningFPS{0};
@@ -21,6 +23,8 @@ class Clock {
 		bool isCompletedSecond() const;
 
 		void update(int fpsCap = 120);
+
+		void handle(Message* message);
 };
 
 

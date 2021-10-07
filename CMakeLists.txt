@@ -15,5 +15,5 @@ find_package(glfw3 3.3 REQUIRED)
 file(GLOB_RECURSE classes ${SRC}/*.cpp)
 include_directories(${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} GLFW ${SRC}/headers ${SRC}/classes)
 
-add_executable(gamedev ${classes})
+add_executable(gamedev ${classes} src/classes/bus/message.cpp src/headers/bus/message.h src/classes/bus/message_bus.cpp src/headers/bus/message_bus.h src/headers/bus/bus_subscriber.h src/classes/bus/bus_subscriber.cpp)
 target_link_libraries(gamedev ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} glfw tbb)

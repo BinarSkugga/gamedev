@@ -1,4 +1,5 @@
 #include <chrono>
+#include <iostream>
 #include <thread>
 #include <GLFW/glfw3.h>
 #include <clock.h>
@@ -46,4 +47,9 @@ void Clock::update(int fpsCap) {
 	}
 
 	this->tikTime = glfwGetTime();
+}
+
+
+void Clock::handle(Message *message) {
+	std::cout << message->getEvent() << "\n";
 }
