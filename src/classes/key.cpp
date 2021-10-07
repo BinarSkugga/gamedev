@@ -1,9 +1,13 @@
-#include <GLFW/glfw3.h>
-#include <key.h>
+#include "GLFW/glfw3.h"
+#include "key.h"
 
 Key::Key(GLFWwindow* window, int code) {
 	this->window = window;
 	this->code = code;
+}
+
+int Key::getCode() const {
+	return this->code;
 }
 
 int Key::getKeyState() const {

@@ -2,7 +2,9 @@
 
 #include <vector>
 #include <queue>
-#include <bus/bus_subscriber.h>
+#include "bus/message.h"
+
+class BusSubscriber;
 
 class MessageBus {
 	private:

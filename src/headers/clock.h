@@ -1,10 +1,13 @@
 #pragma once
 
 
-#include <bus/bus_subscriber.h>
+#include "bus/bus_subscriber.h"
 
 class Clock : public BusSubscriber {
 	private:
+		bool manual{false};
+		int manualCap{120};
+
 		unsigned short FPS{0};
 		unsigned short runningFPS{0};
 
@@ -24,7 +27,7 @@ class Clock : public BusSubscriber {
 
 		void update(int fpsCap = 120);
 
-		void handle(Message* message);
+		void handle(Message* message) override;
 };
 
 

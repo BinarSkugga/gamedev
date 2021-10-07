@@ -1,4 +1,6 @@
-#include <bus/message_bus.h>
+#include "bus/message_bus.h"
+#include "bus/bus_subscriber.h"
+
 
 void MessageBus::addSubscriber(BusSubscriber* subscriber) {
 	this->subscribers.push_back(subscriber);

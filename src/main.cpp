@@ -1,5 +1,5 @@
-#include <window.h>
-#include <pipelines/window_pipeline.h>
+#include "window.h"
+#include "pipelines/window_pipeline.h"
 
 int main() {
 	WindowPipeline wpl = WindowPipeline();

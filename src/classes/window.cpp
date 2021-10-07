@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-#include <window.h>
+#include "window.h"
 
 
 Window::Window(const char* title) {

@@ -1,8 +1,8 @@
 #include <chrono>
-#include <iostream>
 #include <thread>
-#include <GLFW/glfw3.h>
-#include <clock.h>
+#include <iostream>
+#include "GLFW/glfw3.h"
+#include "clock.h"
 
 using namespace std;
 
@@ -29,7 +29,7 @@ bool Clock::isCompletedSecond() const {
 void Clock::update(int fpsCap) {
 	this->completedSecond = false;
 
-	double timePerFrame = 1.0 / fpsCap;
+	double timePerFrame = 1.0 / ((this->manual) ? this->manualCap : fpsCap);
 	double frameTime = glfwGetTime();
 	double deltaTime = frameTime - this->tikTime;
 	double remainingTime = timePerFrame - deltaTime;
@@ -49,7 +49,10 @@ void Clock::update(int fpsCap) {
 	this->tikTime = glfwGetTime();
 }
 
-
 void Clock::handle(Message *message) {
-	std::cout << message->getEvent() << "\n";
+	this->manual = true;
+	if(std::string(message->getEvent()) == "up")
+		this->manualCap += 1;
+	if(std::string(message->getEvent()) == "down")
+		this->manualCap -= 1;
 }

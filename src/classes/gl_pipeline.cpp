@@ -1,5 +1,4 @@
 #include <execution>
-#include <cstdarg>
 
 #include "gl_pipeline.h"
 
@@ -8,8 +7,7 @@ void GLPipeline::add(GLObject* obj) {
 }
 
 void GLPipeline::add(std::initializer_list<GLObject*> objs) {
-	for(GLObject* obj : objs)
-		this->add(obj);
+	this->objects.insert(objs);
 }
 
 void GLPipeline::remove(GLObject* obj) {

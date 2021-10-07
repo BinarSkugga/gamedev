@@ -1,4 +1,4 @@
-#include <bus/message.h>
+#include "bus/message.h"
 
 Message::Message(const char *event) {
 	this->event = event;

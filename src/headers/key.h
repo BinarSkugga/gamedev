@@ -1,7 +1,7 @@
 #pragma once
 
-#include <GLFW/glfw3.h>
-#include <gl_object.h>
+#include "GLFW/glfw3.h"
+#include "gl_object.h"
 
 
 const int RELEASED = -1;
@@ -23,6 +23,7 @@ class Key : public GLObject {
 	public:
 		explicit Key(GLFWwindow* window, int code);
 
+		int getCode() const;
 		int getGLFWState() const;
 		int getKeyState() const;
 		int getConsecutiveHit() const;

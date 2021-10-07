@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include <pipelines/keyboard_pipeline.h>
-#include <key.h>
+#include "pipelines/keyboard_pipeline.h"
+#include "key.h"
 
 
 KeyboardPipeline::KeyboardPipeline(MessageBus *bus) {
@@ -11,6 +11,8 @@ KeyboardPipeline::KeyboardPipeline(MessageBus *bus) {
 void KeyboardPipeline::processObject(GLObject* obj) {
 	Key* key = dynamic_cast<Key*>(obj);
 
-	if(key->isReleased())
-		this->bus->send(Message("released"));
+	if(key->getCode() == GLFW_KEY_UP and (key->isPressed(0) or key->isHeld()))
+		this->bus->send(Message("up"));
+	if(key->getCode() == GLFW_KEY_DOWN and (key->isPressed(0) or key->isHeld()))
+		this->bus->send(Message("down"));
 }
