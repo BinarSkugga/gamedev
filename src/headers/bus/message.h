@@ -1,10 +1,15 @@
 #pragma once
 
+template<class T>
 class Message {
 	private:
-		const char* event;
+		const char* event{};
+		T* data;
 
 	public:
-		explicit Message(const char* event);
+		explicit Message(const char* eventName);
+		Message(const char* eventName, T* data);
+
 		const char* getEvent();
+		T* getData();
 };

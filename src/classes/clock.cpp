@@ -49,10 +49,12 @@ void Clock::update(int fpsCap) {
 	this->tikTime = glfwGetTime();
 }
 
-void Clock::handle(Message *message) {
+void Clock::handle(Message<Key> *message) {
 	this->manual = true;
 	if(std::string(message->getEvent()) == "up")
 		this->manualCap += 1;
-	if(std::string(message->getEvent()) == "down")
+	if(std::string(message->getEvent()) == "down") {
 		this->manualCap -= 1;
+		std::cout << message->getData()->getConsecutiveHit() << "\n";
+	}
 }

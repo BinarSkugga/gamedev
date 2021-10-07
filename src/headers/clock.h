@@ -2,8 +2,9 @@
 
 
 #include "bus/bus_subscriber.h"
+#include "key.h"
 
-class Clock : public BusSubscriber {
+class Clock : public BusSubscriber<Key> {
 	private:
 		bool manual{false};
 		int manualCap{120};
@@ -27,7 +28,7 @@ class Clock : public BusSubscriber {
 
 		void update(int fpsCap = 120);
 
-		void handle(Message* message) override;
+		void handle(Message<Key>* message) override;
 };
 
 

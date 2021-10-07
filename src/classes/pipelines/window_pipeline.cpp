@@ -1,5 +1,4 @@
 #include "clock.h"
-
 #include "GLFW/glfw3.h"
 #include "gl_object.h"
 #include "window.h"
@@ -12,7 +11,7 @@ void WindowPipeline::processObject(GLObject* obj) {
 	Window* window = dynamic_cast<Window*>(obj);
 	GLFWwindow* glwin = window->getGLFW();
 
-	MessageBus mb = MessageBus();
+	MessageBus mb = MessageBus<Key>();
 
 	KeyboardPipeline kpl = KeyboardPipeline(&mb);
 	Key* wKey = new Key(glwin, GLFW_KEY_W);
@@ -44,6 +43,6 @@ void WindowPipeline::processObject(GLObject* obj) {
 			window->setSubtitle(subtitle.c_str());
 		}
 
-		clock.update(window->isFocused() ? 120 : 24);
+		clock.update(window->isFocused() ? 120 : 10);
 	}
 }
