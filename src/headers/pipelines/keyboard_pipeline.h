@@ -5,7 +5,7 @@
 #include "bus/message_bus.h"
 
 
-class KeyboardPipeline : public GLPipeline {
+class KeyboardPipeline : public GLPipeline<Key> {
 	private:
 		MessageBus<Key>* bus;
 
@@ -13,5 +13,5 @@ class KeyboardPipeline : public GLPipeline {
 		explicit KeyboardPipeline(MessageBus<Key>* bus);
 
 	protected:
-		void processObject(GLObject* obj) override;
+		void processObject(Key* obj) override;
 };

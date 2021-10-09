@@ -18,7 +18,6 @@ class Window : public GLObject {
 
 		void setSubtitle(const char* subtitle);
 
-	protected:
 		void init() override;
 		void clean() override;
 };

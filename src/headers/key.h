@@ -35,7 +35,6 @@ class Key : public GLObject {
 		bool isReleased() const;
 		bool isHeld() const;
 
-	protected:
 		void init() override;
 		void clean() override;
 };

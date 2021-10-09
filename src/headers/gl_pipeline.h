@@ -1,21 +1,22 @@
 #pragma once
 
-#include "gl_object.h"
 #include <set>
+#include "gl_object.h"
 
 
+template<class T>
 class GLPipeline {
 	private:
-		std::set<GLObject*> objects;
+		std::set<T*> objects;
 	public:
-		void remove(GLObject* obj);
-		void remove(std::initializer_list<GLObject*> objs);
-		void add(GLObject* obj);
-		void add(std::initializer_list<GLObject*> objs);
+		void remove(T* obj);
+		void remove(std::initializer_list<T*> objs);
+		void add(T* obj);
+		void add(std::initializer_list<T*> objs);
 		void process(bool parallel = false);
 
 	protected:
-		virtual void processObject(GLObject* obj) = 0;
+		virtual void processObject(T* obj) = 0;
 };
 
 

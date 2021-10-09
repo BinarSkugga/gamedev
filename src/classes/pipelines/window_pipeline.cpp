@@ -7,8 +7,7 @@
 #include "key.h"
 #include "bus/message_bus.h"
 
-void WindowPipeline::processObject(GLObject* obj) {
-	Window* window = dynamic_cast<Window*>(obj);
+void WindowPipeline::processObject(Window* window) {
 	GLFWwindow* glwin = window->getGLFW();
 
 	MessageBus mbKey = MessageBus<Key>();
