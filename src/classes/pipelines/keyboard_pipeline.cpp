@@ -13,6 +13,6 @@ void KeyboardPipeline::processObject(GLObject* obj) {
 
 	if(key->getCode() == GLFW_KEY_UP and (key->isPressed(0) or key->isHeld()))
 		this->bus->send(Message<Key>("up", key));
-	if(key->getCode() == GLFW_KEY_DOWN and (key->isPressed(0) or key->isHeld()))
+	if(key->getCode() == GLFW_MOUSE_BUTTON_LEFT and (key->isPressed(0) or key->isHeld()))
 		this->bus->send(Message<Key>("down", key));
 }

@@ -55,6 +55,6 @@ void Clock::handle(Message<Key> *message) {
 		this->manualCap += 1;
 	if(std::string(message->getEvent()) == "down") {
 		this->manualCap -= 1;
-		std::cout << message->getData()->getConsecutiveHit() << "\n";
 	}
+	std::cout << message->getData()->getConsecutiveHit() << "\n";
 }

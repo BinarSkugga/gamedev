@@ -14,6 +14,7 @@ class Key : public GLObject {
 	private:
 		GLFWwindow* window;
 		int code;
+		bool isMouse;
 		int state{IDLE};
 
 		int consecutiveHit{1};
@@ -21,7 +22,7 @@ class Key : public GLObject {
 		double lastRelease{0.0};
 
 	public:
-		explicit Key(GLFWwindow* window, int code);
+		explicit Key(GLFWwindow* window, int code, bool isMouse = false);
 
 		int getCode() const;
 		int getGLFWState() const;

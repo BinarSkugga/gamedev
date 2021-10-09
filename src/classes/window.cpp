@@ -38,6 +38,9 @@ void Window::init() {
 	glfwMakeContextCurrent(this->window);
 	glViewport(0, 0, this->width, this->height);
 	glfwSwapInterval(0);
+
+//	glfwSetInputMode(this->window, GLFW_STICKY_MOUSE_BUTTONS, GLFW_TRUE);
+//	glfwSetInputMode(this->window, GLFW_STICKY_KEYS, GLFW_TRUE);
 }
 
 void Window::clean() {
