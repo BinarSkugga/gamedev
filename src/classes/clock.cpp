@@ -51,9 +51,9 @@ void Clock::update(int fpsCap) {
 
 void Clock::handle(Message<Key> *message) {
 	this->manual = true;
-	if(std::string(message->getEvent()) == "up")
+	if(std::string(message->getEvent()) == "scrup")
 		this->manualCap += 1;
-	if(std::string(message->getEvent()) == "down") {
+	if(std::string(message->getEvent()) == "scrdown") {
 		this->manualCap -= 1;
 	}
 	std::cout << message->getData()->getConsecutiveHit() << "\n";
