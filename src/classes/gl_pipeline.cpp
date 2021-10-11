@@ -1,6 +1,6 @@
 #include <execution>
-#include <window.h>
-#include <key.h>
+#include "window.h"
+#include "key.h"
 
 #include "gl_pipeline.h"
 
@@ -26,6 +26,13 @@ void GLPipeline<T>::remove(std::initializer_list<T*> objs) {
 }
 
 template<class T>
+void GLPipeline<T>::processObj(T* obj) {
+	obj->init();
+	this->processObject(obj);
+	obj->clean();
+}
+
+template<class T>
 void GLPipeline<T>::process(bool parallel) {
 	if(parallel) {
 		std::for_each(
@@ -33,18 +40,16 @@ void GLPipeline<T>::process(bool parallel) {
 				this->objects.begin(),
 				this->objects.end(),
 				[this](T* obj) {
-					obj->init();
-					this->processObject(obj);
-					obj->clean();
+					this->processObj(obj);
 				}
 		);
 	} else {
 		for(T* obj : this->objects) {
-			obj->init();
-			this->processObject(obj);
-			obj->clean();
+			this->processObj(obj);
 		}
 	}
+
+	this->bus.publish();
 }
 
 template class GLPipeline<Window>;

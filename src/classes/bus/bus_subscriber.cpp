@@ -1,5 +1,6 @@
 #include <cstring>
-#include <key.h>
+#include "key.h"
+#include "window.h"
 #include "bus/bus_subscriber.h"
 #include "bus/message_bus.h"
 
@@ -23,3 +24,4 @@ void BusSubscriber<T>::listenTo(MessageBus<T>* bus) {
 
 
 template class BusSubscriber<Key>;
+template class BusSubscriber<Window>;

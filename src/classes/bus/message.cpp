@@ -1,4 +1,5 @@
-#include <key.h>
+#include "key.h"
+#include "window.h"
 #include "bus/message.h"
 
 template<class T>
@@ -23,3 +24,4 @@ T* Message<T>::getData() {
 
 
 template class Message<Key>;
+template class Message<Window>;

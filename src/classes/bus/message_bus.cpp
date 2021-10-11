@@ -1,4 +1,5 @@
-#include <key.h>
+#include "key.h"
+#include "window.h"
 #include "bus/message_bus.h"
 #include "bus/bus_subscriber.h"
 
@@ -28,3 +29,4 @@ void MessageBus<T>::publish() {
 
 
 template class MessageBus<Key>;
+template class MessageBus<Window>;
