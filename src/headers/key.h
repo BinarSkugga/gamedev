@@ -4,14 +4,14 @@
 #include "gl_object.h"
 
 
-const int RELEASED = -1;
-const int IDLE = 0;
-const int PRESSED = 1;
-const int HELD = 2;
-
+#define CONSECUTIVE_RESET 0.3
+#define RELEASED -1
+#define IDLE 0
+#define PRESSED 1
+#define HELD 2
 
 class Key : public GLObject {
-	private:
+	protected:
 		GLFWwindow* window;
 		int code;
 		bool isMouse;
@@ -22,7 +22,7 @@ class Key : public GLObject {
 		double lastRelease{0.0};
 
 	public:
-		explicit Key(GLFWwindow* window, int code, bool isMouse = false);
+		Key(GLFWwindow* window, int code, bool isMouse = false);
 
 		int getCode() const;
 		int getGLFWState() const;

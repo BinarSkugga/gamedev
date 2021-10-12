@@ -1,22 +1,21 @@
 #include <iostream>
+#include <scroll_key.h>
 
 #include "pipelines/input_pipeline.h"
 #include "key.h"
 
 
 InputPipeline::InputPipeline(GLFWwindow* window) {
-	InputPipeline::pipeline = this;
-	InputPipeline::scrollUpKey = new Key(window, SCROLL_UP_KEY);
-	InputPipeline::scrollDownKey = new Key(window, SCROLL_DOWN_KEY);
+	InputPipeline::scrollKey = new ScrollKey(window);
+	this->add(InputPipeline::scrollKey);
 
 	glfwSetScrollCallback(window, [](GLFWwindow* win, double xoffset, double yoffset) {
-		if(yoffset > 0)
-			InputPipeline::pipeline->bus.send(Message<Key>("scrup", InputPipeline::scrollUpKey));
-		else if(yoffset < 0)
-			InputPipeline::pipeline->bus.send(Message<Key>("scrdown", InputPipeline::scrollDownKey));
+		InputPipeline::scrollKey->updateOffset(yoffset);
 	});
 }
 
 void InputPipeline::processObject(Key* key) {
-
+	if(key->getCode() == InputPipeline::scrollKey->getCode() and InputPipeline::scrollKey->scrolled()) {
+		std::cout << key->getConsecutiveHit() << std::endl;
+	}
 }

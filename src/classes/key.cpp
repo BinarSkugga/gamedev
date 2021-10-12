@@ -64,7 +64,7 @@ void Key::init() {
 		// Key is currently pressed but was idle in the previous frame
 		if(this->state == IDLE or this->state == RELEASED) {
 			// Key was released less than 300ms ago
-			if(glfwGetTime() - this->lastRelease < 0.3) {
+			if(glfwGetTime() - this->lastRelease < CONSECUTIVE_RESET) {
 				this->state = PRESSED;
 				this->consecutiveHit += 1;
 				this->lastPress = glfwGetTime();
