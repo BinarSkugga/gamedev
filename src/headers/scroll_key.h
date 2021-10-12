@@ -3,6 +3,7 @@
 #include "key.h"
 
 #define SCROLL_KEY 10000
+#define CONSECUTIVE_SCROLL_RESET 0.2
 
 class ScrollKey : public Key {
 	private:

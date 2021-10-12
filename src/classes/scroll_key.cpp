@@ -14,8 +14,8 @@ bool ScrollKey::scrolled(int consecutive) {
 }
 
 void ScrollKey::init() {
-	// Has been idle for 300ms
-	if(this->lastOffset == this->offset and glfwGetTime() - this->lastRelease > CONSECUTIVE_RESET) {
+	// Has been idle for 100ms
+	if(this->lastOffset == this->offset and glfwGetTime() - this->lastRelease > CONSECUTIVE_SCROLL_RESET) {
 		this->state = 0;
 		this->offset = 0;
 		this->consecutiveHit = 1;
@@ -27,9 +27,10 @@ void ScrollKey::init() {
 		int currentState = (this->offset - this->lastOffset > 0) ? 1 : -1;
 		if(currentState != this->state) this->consecutiveHit = 1;
 
-		// Increased consecutive hits if user had scrolled in the same direction in the last 300ms
-		if(this->state == currentState and glfwGetTime() - this->lastRelease < CONSECUTIVE_RESET) {
-			this->consecutiveHit += 1;
+		// Increased consecutive hits if user had scrolled in the same direction in the last 100ms
+		if(this->state == currentState and glfwGetTime() - this->lastRelease < CONSECUTIVE_SCROLL_RESET) {
+			if(this->consecutiveHit < 10)
+				this->consecutiveHit += 1;
 		}
 		this->state = currentState;
 		this->lastRelease = glfwGetTime();
