@@ -8,6 +8,8 @@
 class ScrollKey : public Key {
 	private:
 		int lastOffset{0}, offset{0};
+		int lastExposedConsecutiveHit{0};
+		bool firstHit{false};
 	public:
 		explicit ScrollKey(GLFWwindow* window);
 		bool scrolled(int consecutive = 0);

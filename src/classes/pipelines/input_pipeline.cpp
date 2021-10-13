@@ -16,6 +16,6 @@ InputPipeline::InputPipeline(GLFWwindow* window) {
 
 void InputPipeline::processObject(Key* key) {
 	if(key->getCode() == InputPipeline::scrollKey->getCode() and InputPipeline::scrollKey->scrolled()) {
-		std::cout << key->getConsecutiveHit() << std::endl;
+		this->bus.send(Message<Key>("scroll", key));
 	}
 }

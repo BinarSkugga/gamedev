@@ -19,8 +19,7 @@ void WindowPipeline::processObject(Window* window) {
 	ipl.add({wKey, aKey, sKey, dKey, upKey, downKey});
 
 	Clock clock = Clock();
-	clock.subscribe("scrup");
-	clock.subscribe("scrdown");
+	clock.subscribe("scroll");
 	clock.listenTo(&ipl.bus);
 
 	while(!glfwWindowShouldClose(glwin)) {

@@ -8,30 +8,32 @@ void ScrollKey::updateOffset(int newOffset) {
 }
 
 bool ScrollKey::scrolled(int consecutive) {
+	if(this->consecutiveHit == this->lastExposedConsecutiveHit and !this->firstHit)
+		return false;
+	this->lastExposedConsecutiveHit = this->consecutiveHit;
+
 	if(consecutive == 0)
 		return this->state != 0;
 	return this->state != 0 and this->consecutiveHit == consecutive;
 }
 
 void ScrollKey::init() {
-	// Has been idle for CONSECUTIVE_SCROLL_RESET seconds
+	this->firstHit = false;
 	if(this->lastOffset == this->offset and glfwGetTime() - this->lastRelease > CONSECUTIVE_SCROLL_RESET) {
 		this->state = 0;
 		this->offset = 0;
 		this->consecutiveHit = 1;
 		this->lastRelease = 0.0;
-	}
-	// User scrolled
-	else if(this->lastOffset != this->offset) {
-		// The current state is 1 for scrolling down and -1 for scrolling up
+	} else if(this->lastOffset != this->offset) {
 		int currentState = (this->offset - this->lastOffset > 0) ? 1 : -1;
-		if(currentState != this->state) this->consecutiveHit = 1;
 
-		// Increased consecutive hits if user had scrolled in the same direction in the last CONSECUTIVE_SCROLL_RESET seconds
-		if(this->state == currentState and glfwGetTime() - this->lastRelease < CONSECUTIVE_SCROLL_RESET) {
-			if(this->consecutiveHit < 10)
-				this->consecutiveHit += 1;
+		if(this->state == currentState and glfwGetTime() - this->lastRelease <= CONSECUTIVE_SCROLL_RESET) {
+			this->consecutiveHit += 1;
+		} else {
+			this->firstHit = true;
+			this->consecutiveHit = 1;
 		}
+
 		this->state = currentState;
 		this->lastRelease = glfwGetTime();
 	}

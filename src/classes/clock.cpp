@@ -1,6 +1,7 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
+#include <scroll_key.h>
 #include "GLFW/glfw3.h"
 #include "clock.h"
 
@@ -49,12 +50,16 @@ void Clock::update(int fpsCap) {
 	this->tikTime = glfwGetTime();
 }
 
-void Clock::handle(Message<Key> *message) {
+void Clock::handle(Message<Key>* message) {
 	this->manual = true;
-	if(std::string(message->getEvent()) == "scrup")
-		this->manualCap += 1;
-	if(std::string(message->getEvent()) == "scrdown") {
-		this->manualCap -= 1;
+	if(std::string(message->getEvent()) == "scroll") {
+		ScrollKey* key = dynamic_cast<ScrollKey *>(message->getData());
+		int change = (int)(this->getDelta() * 100 * key->getConsecutiveHit());
+
+		if(key->getKeyState() > 0) this->manualCap -= change;
+		else this->manualCap += change;
+
+		if(this->manualCap < 10) this->manualCap = 10;
+		else if(this->manualCap > 240) this->manualCap = 240;
 	}
-	std::cout << message->getData()->getConsecutiveHit() << "\n";
 }
