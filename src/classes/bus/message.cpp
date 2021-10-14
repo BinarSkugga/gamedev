@@ -13,12 +13,12 @@ Message<T>::Message(const char *eventName, T* data) : Message(eventName) {
 }
 
 template<class T>
-const char* Message<T>::getEvent() {
+const char* Message<T>::getEvent() const {
 	return this->event;
 }
 
 template<class T>
-T* Message<T>::getData() {
+T* Message<T>::getData() const {
 	return this->data;
 }
 

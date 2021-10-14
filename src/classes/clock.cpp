@@ -50,7 +50,7 @@ void Clock::update(int fpsCap) {
 	this->tikTime = glfwGetTime();
 }
 
-void Clock::handle(Message<Key>* message) {
+void Clock::handle(const Message<Key>* message) {
 	this->manual = true;
 	if(std::string(message->getEvent()) == "scroll") {
 		ScrollKey* key = dynamic_cast<ScrollKey *>(message->getData());

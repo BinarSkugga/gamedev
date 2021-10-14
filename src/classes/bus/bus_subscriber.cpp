@@ -10,7 +10,7 @@ void BusSubscriber<T>::subscribe(const char *event) {
 }
 
 template<class T>
-bool BusSubscriber<T>::isSubscribed(const char* event) {
+bool BusSubscriber<T>::isSubscribed(const char* event) const {
 	std::vector<const char*> subs = this->subscriptions;
 	return std::any_of(subs.begin(), subs.end(), [event](const char* sub){
 		return strcmp(sub, event) == 0;

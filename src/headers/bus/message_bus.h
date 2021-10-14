@@ -11,11 +11,11 @@ class BusSubscriber;
 template<class T>
 class MessageBus {
 	private:
-		std::vector<BusSubscriber<T>*> subscribers;
+		std::vector<const BusSubscriber<T>*> subscribers;
 		std::queue<Message<T>> messages;
 
 	public:
-		void addSubscriber(BusSubscriber<T>* subscriber);
+		void addSubscriber(const BusSubscriber<T>* subscriber);
 		void send(Message<T> message);
 		void publish();
 };

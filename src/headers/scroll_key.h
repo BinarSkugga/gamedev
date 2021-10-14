@@ -11,7 +11,7 @@ class ScrollKey : public Key {
 		int lastExposedConsecutiveHit{0};
 		bool firstHit{false};
 	public:
-		explicit ScrollKey(GLFWwindow* window);
+		explicit ScrollKey(const GLFWwindow* window);
 		bool scrolled(int consecutive = 0);
 		void updateOffset(int newOffset);
 

@@ -10,6 +10,6 @@ class Message {
 		explicit Message(const char* eventName);
 		Message(const char* eventName, T* data);
 
-		const char* getEvent();
-		T* getData();
+		const char* getEvent() const;
+		T* getData() const;
 };

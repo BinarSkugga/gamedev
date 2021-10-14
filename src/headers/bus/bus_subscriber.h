@@ -11,7 +11,7 @@ class BusSubscriber {
 	public:
 		void subscribe(const char* event);
 		void listenTo(MessageBus<T>* bus);
-		virtual void handle(Message<T>* message) = 0;
+		virtual void handle(const Message<T>* message) = 0;
 
-		bool isSubscribed(const char* event);
+		bool isSubscribed(const char* event) const;
 };

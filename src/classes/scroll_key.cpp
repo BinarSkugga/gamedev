@@ -1,7 +1,7 @@
 #include "scroll_key.h"
 
 
-ScrollKey::ScrollKey(GLFWwindow *window) : Key(window, SCROLL_KEY, true) {}
+ScrollKey::ScrollKey(const GLFWwindow *window) : Key(window, SCROLL_KEY, true) {}
 
 void ScrollKey::updateOffset(int newOffset) {
 	this->offset -= newOffset;

@@ -5,7 +5,7 @@
 
 
 template<class T>
-void MessageBus<T>::addSubscriber(BusSubscriber<T>* subscriber) {
+void MessageBus<T>::addSubscriber(const BusSubscriber<T>* subscriber) {
 	this->subscribers.push_back(subscriber);
 }
 
@@ -17,10 +17,12 @@ void MessageBus<T>::send(Message<T> message) {
 template<class T>
 void MessageBus<T>::publish() {
 	while(!this->messages.empty()) {
-		for(BusSubscriber<T>* sub : this->subscribers) {
+		for(const BusSubscriber<T>* sub : this->subscribers) {
 			Message message = this->messages.front();
-			if(sub->isSubscribed(message.getEvent()))
-				sub->handle(&message);
+			if(sub->isSubscribed(message.getEvent())) {
+				BusSubscriber<T>* nonConst = const_cast<BusSubscriber<T>*>(sub);
+				nonConst->handle(&message);
+			}
 		}
 
 		this->messages.pop();
