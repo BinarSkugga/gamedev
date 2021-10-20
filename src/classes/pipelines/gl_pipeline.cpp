@@ -2,7 +2,7 @@
 #include "window.h"
 #include "key.h"
 
-#include "gl_pipeline.h"
+#include "pipelines/gl_pipeline.h"
 
 template<class T>
 void GLPipeline<T>::add(T* obj) {

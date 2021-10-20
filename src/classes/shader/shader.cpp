@@ -1,11 +1,21 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <cstring>
 
 #include "GL/glew.h"
 #include "shader/shader.h"
 
-Shader::Shader(const char* filePath, int shaderType) {
+std::string getShaderPath(const char* shaderName, const char* extension) {
+	std::string fullPath = "shaders/";
+	fullPath.append(shaderName);
+	fullPath.append(".");
+	fullPath.append(extension);
+
+	return fullPath;
+}
+
+Shader::Shader(std::string filePath, int shaderType) {
 	std::string line;
 	std::ifstream shaderFile{filePath};
 
@@ -35,6 +45,6 @@ Shader::Shader(const char* filePath, int shaderType) {
 	}
 }
 
-int Shader::getID() const {
+unsigned int Shader::getID() const {
 	return this->id;
 }

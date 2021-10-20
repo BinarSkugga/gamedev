@@ -1,5 +1,6 @@
 #include <GL/glew.h>
 #include <iostream>
+#include <shader/shader_program.h>
 #include "window.h"
 #include "clock.h"
 #include "GLFW/glfw3.h"
@@ -24,8 +25,7 @@ void WindowPipeline::processObject(Window* const window) {
 	clock.subscribe("scroll");
 	ipl.bus.addSubscriber(&clock);
 
-	Shader* vshader = new Shader("shaders/main.vert", GL_VERTEX_SHADER);
-	Shader* fshader = new Shader("shaders/main.frag", GL_FRAGMENT_SHADER);
+	ShaderProgram* mainProgram = new ShaderProgram("main");
 
 	float vertices[] = {
 			-0.5f, -0.5f, 0.0f,
@@ -44,29 +44,12 @@ void WindowPipeline::processObject(Window* const window) {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 	glEnableVertexAttribArray(0);
 
-	unsigned int program;
-	program = glCreateProgram();
-	glAttachShader(program, vshader->getID());
-	glAttachShader(program, fshader->getID());
-	glLinkProgram(program);
-
-	int success;
-	char* infoLog;
-	glGetProgramiv(program, GL_LINK_STATUS, &success);
-
-	if(!success) {
-		infoLog = (char*) malloc(GL_INFO_LOG_LENGTH);
-		glGetProgramInfoLog(program, GL_INFO_LOG_LENGTH, nullptr, infoLog);
-		std::cerr << "Failed to compile shader: " << infoLog << "\n";
-		delete infoLog;
-	}
-
 	while(!glfwWindowShouldClose(glwin)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// START RENDER HERE
 
-		glUseProgram(program);
+		mainProgram->init();
 		glBindVertexArray(vao);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
