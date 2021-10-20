@@ -1,6 +1,6 @@
 #include <cstring>
-#include "key.h"
 #include "window.h"
+#include "key.h"
 #include "bus/bus_subscriber.h"
 #include "bus/message_bus.h"
 
@@ -18,7 +18,7 @@ bool BusSubscriber<T>::isSubscribed(const char* event) const {
 }
 
 template<class T>
-void BusSubscriber<T>::listenTo(MessageBus<T>* bus) {
+void BusSubscriber<T>::listenTo(MessageBus<T>* const bus) {
 	bus->addSubscriber(this);
 }
 

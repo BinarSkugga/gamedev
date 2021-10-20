@@ -11,8 +11,8 @@ class InputPipeline : public GLPipeline<Key> {
 		inline static ScrollKey* scrollKey;
 
 	public:
-		explicit InputPipeline(GLFWwindow* window);
+		explicit InputPipeline(GLFWwindow* const window);
 
 	protected:
-		void processObject(Key* obj) override;
+		void processObject(Key* const obj) override;
 };

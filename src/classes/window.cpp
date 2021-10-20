@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstring>
+#include "GL/glew.h"
+
 #include "window.h"
 
 
@@ -31,6 +33,7 @@ void Window::init() {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	this->window = glfwCreateWindow(this->width, this->height, this->title, nullptr, nullptr);
@@ -38,6 +41,9 @@ void Window::init() {
 	glfwMakeContextCurrent(this->window);
 	glViewport(0, 0, this->width, this->height);
 	glfwSwapInterval(0);
+
+	glewExperimental = true;
+	glewInit();
 
 //	glfwSetInputMode(this->window, GLFW_STICKY_MOUSE_BUTTONS, GLFW_TRUE);
 //	glfwSetInputMode(this->window, GLFW_STICKY_KEYS, GLFW_TRUE);

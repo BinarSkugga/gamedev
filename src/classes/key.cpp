@@ -1,7 +1,7 @@
 #include "GLFW/glfw3.h"
 #include "key.h"
 
-Key::Key(const GLFWwindow* window, int code, bool isMouse) {
+Key::Key(GLFWwindow* const window, int code, bool isMouse) {
 	this->window = window;
 	this->code = code;
 	this->isMouse = isMouse;
@@ -20,11 +20,10 @@ int Key::getConsecutiveHit() const {
 }
 
 int Key::getGLFWState() const {
-	GLFWwindow* nonConst = const_cast<GLFWwindow*>(this->window);
 	if(this->isMouse) {
-		return glfwGetMouseButton(nonConst, this->code);
+		return glfwGetMouseButton(this->window, this->code);
 	} else {
-		return glfwGetKey(nonConst, this->code);
+		return glfwGetKey(this->window, this->code);
 	}
 }
 

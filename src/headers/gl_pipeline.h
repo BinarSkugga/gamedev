@@ -8,21 +8,21 @@
 template<class T>
 class GLPipeline {
 	private:
-		std::set<const T*> objects;
-		void processObj(const T* obj);
+		std::set<T*> objects;
+		void processObj(T* obj);
 
 	public:
 		MessageBus<T> bus{};
 
-		void remove(const T* obj);
-		void remove(std::initializer_list<const T*> objs);
-		void add(const T* obj);
-		void add(std::initializer_list<const T*> objs);
+		void remove(T* obj);
+		void remove(std::initializer_list<T*> objs);
+		void add(T* obj);
+		void add(std::initializer_list<T*> objs);
 
 		void process(bool parallel = false);
 
 	protected:
-		virtual void processObject(T* obj) = 0;
+		virtual void processObject(T* const obj) = 0;
 };
 
 

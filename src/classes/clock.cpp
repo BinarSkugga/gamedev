@@ -1,8 +1,10 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
-#include <scroll_key.h>
+
 #include "GLFW/glfw3.h"
+
+#include "scroll_key.h"
 #include "clock.h"
 
 using namespace std;
@@ -50,7 +52,7 @@ void Clock::update(int fpsCap) {
 	this->tikTime = glfwGetTime();
 }
 
-void Clock::handle(const Message<Key>* message) {
+void Clock::handle(Message<Key>* const message) {
 	this->manual = true;
 	if(std::string(message->getEvent()) == "scroll") {
 		ScrollKey* key = dynamic_cast<ScrollKey *>(message->getData());

@@ -12,7 +12,7 @@
 
 class Key : public GLObject {
 	protected:
-		const GLFWwindow* window;
+		GLFWwindow* window;
 		int code;
 		bool isMouse;
 		int state{IDLE};
@@ -22,7 +22,7 @@ class Key : public GLObject {
 		double lastRelease{0.0};
 
 	public:
-		Key(const GLFWwindow* window, int code, bool isMouse = false);
+		Key(GLFWwindow* const window, int code, bool isMouse = false);
 
 		int getCode() const;
 		int getGLFWState() const;

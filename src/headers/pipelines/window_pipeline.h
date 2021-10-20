@@ -4,5 +4,5 @@
 
 class WindowPipeline : public virtual GLPipeline<Window> {
 	protected:
-		void processObject(Window* obj) override;
+		void processObject(Window* const obj) override;
 };

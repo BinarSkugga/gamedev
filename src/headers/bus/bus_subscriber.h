@@ -10,8 +10,8 @@ class BusSubscriber {
 		std::vector<const char*> subscriptions;
 	public:
 		void subscribe(const char* event);
-		void listenTo(MessageBus<T>* bus);
-		virtual void handle(const Message<T>* message) = 0;
+		void listenTo(MessageBus<T>* const bus);
+		virtual void handle(Message<T>* const message) = 0;
 
 		bool isSubscribed(const char* event) const;
 };

@@ -28,7 +28,7 @@ class Clock : public BusSubscriber<Key> {
 
 		void update(int fpsCap = 120);
 
-		void handle(const Message<Key>* message) override;
+		void handle(Message<Key>* const message) override;
 };
 
 

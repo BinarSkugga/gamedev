@@ -1,12 +1,13 @@
+#include "window.h"
 #include "clock.h"
 #include "GLFW/glfw3.h"
-#include "window.h"
 #include "pipelines/window_pipeline.h"
 #include "pipelines/input_pipeline.h"
 #include "key.h"
+#include "shader/shader.h"
 #include "bus/message_bus.h"
 
-void WindowPipeline::processObject(Window* window) {
+void WindowPipeline::processObject(Window* const window) {
 	GLFWwindow* glwin = window->getGLFW();
 
 	InputPipeline ipl = InputPipeline(glwin);
@@ -21,6 +22,9 @@ void WindowPipeline::processObject(Window* window) {
 	Clock clock = Clock();
 	clock.subscribe("scroll");
 	clock.listenTo(&ipl.bus);
+
+	Shader* vshader = new Shader("main.vert");
+	Shader* fshader = new Shader("main.frag");
 
 	while(!glfwWindowShouldClose(glwin)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

@@ -5,33 +5,31 @@
 #include "gl_pipeline.h"
 
 template<class T>
-void GLPipeline<T>::add(const T* obj) {
+void GLPipeline<T>::add(T* obj) {
 	this->objects.insert(obj);
 }
 
 template<class T>
-void GLPipeline<T>::add(std::initializer_list<const T*> objs) {
+void GLPipeline<T>::add(std::initializer_list<T*> objs) {
 	this->objects.insert(objs);
 }
 
 template<class T>
-void GLPipeline<T>::remove(const T* obj) {
+void GLPipeline<T>::remove(T* obj) {
 	this->objects.erase(obj);
 }
 
 template<class T>
-void GLPipeline<T>::remove(std::initializer_list<const T*> objs) {
-	for(const T* obj : objs)
-		this->remove(obj);
+void GLPipeline<T>::remove(std::initializer_list<T*> objs) {
+	for(T* const obj : objs)
+		this->objects.erase(obj);
 }
 
 template<class T>
-void GLPipeline<T>::processObj(const T* obj) {
-	T* nonConst = const_cast<T*>(obj);
-
-	nonConst->init();
-	this->processObject(nonConst);
-	nonConst->clean();
+void GLPipeline<T>::processObj(T* obj) {
+	obj->init();
+	this->processObject(obj);
+	obj->clean();
 }
 
 template<class T>
@@ -41,12 +39,12 @@ void GLPipeline<T>::process(bool parallel) {
 				std::execution::par_unseq,
 				this->objects.begin(),
 				this->objects.end(),
-				[this](const T* obj) {
+				[this](T* obj) {
 					this->processObj(obj);
 				}
 		);
 	} else {
-		for(const T* obj : this->objects) {
+		for(T* obj : this->objects) {
 			this->processObj(obj);
 		}
 	}

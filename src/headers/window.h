@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GLFW/glfw3.h"
+
 #include "gl_object.h"
 
 class Window : public GLObject {

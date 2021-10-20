@@ -1,11 +1,11 @@
 #include <iostream>
-#include <scroll_key.h>
+#include "scroll_key.h"
 
 #include "pipelines/input_pipeline.h"
 #include "key.h"
 
 
-InputPipeline::InputPipeline(GLFWwindow* window) {
+InputPipeline::InputPipeline(GLFWwindow* const window) {
 	InputPipeline::scrollKey = new ScrollKey(window);
 	this->add(InputPipeline::scrollKey);
 
@@ -14,7 +14,7 @@ InputPipeline::InputPipeline(GLFWwindow* window) {
 	});
 }
 
-void InputPipeline::processObject(Key* key) {
+void InputPipeline::processObject(Key* const key) {
 	if(key->getCode() == InputPipeline::scrollKey->getCode() and InputPipeline::scrollKey->scrolled()) {
 		this->bus.send(Message<Key>("scroll", key));
 	}

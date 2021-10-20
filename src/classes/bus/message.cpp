@@ -1,5 +1,5 @@
-#include "key.h"
 #include "window.h"
+#include "key.h"
 #include "bus/message.h"
 
 template<class T>
