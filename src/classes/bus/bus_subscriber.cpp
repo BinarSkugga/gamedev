@@ -2,7 +2,6 @@
 #include "window.h"
 #include "key.h"
 #include "bus/bus_subscriber.h"
-#include "bus/message_bus.h"
 
 template<class T>
 void BusSubscriber<T>::subscribe(const char *event) {
@@ -15,11 +14,6 @@ bool BusSubscriber<T>::isSubscribed(const char* event) const {
 	return std::any_of(subs.begin(), subs.end(), [event](const char* sub){
 		return strcmp(sub, event) == 0;
 	});
-}
-
-template<class T>
-void BusSubscriber<T>::listenTo(MessageBus<T>* const bus) {
-	bus->addSubscriber(this);
 }
 
 

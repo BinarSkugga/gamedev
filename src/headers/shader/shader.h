@@ -6,7 +6,8 @@ class Shader {
 	private:
 		int id;
 		std::string shaderCode{};
-
 	public:
-		explicit Shader(const char* filePath);
+		Shader(const char* filePath, int shaderType);
+
+		int getID() const;
 };

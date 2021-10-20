@@ -5,7 +5,7 @@
 #include "GL/glew.h"
 #include "shader/shader.h"
 
-Shader::Shader(const char* filePath) {
+Shader::Shader(const char* filePath, int shaderType) {
 	std::string line;
 	std::ifstream shaderFile{filePath};
 
@@ -16,19 +16,25 @@ Shader::Shader(const char* filePath) {
 		shaderFile.close();
 
 		const char* source = this->shaderCode.c_str();
-		this->id = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(this->id, 1, &source, NULL);
+		this->id = glCreateShader(shaderType);
+		glShaderSource(this->id, 1, &source, nullptr);
 		glCompileShader(this->id);
 
 		int success;
-		char infoLog[512];
+		char* infoLog;
 		glGetShaderiv(this->id, GL_COMPILE_STATUS, &success);
 
 		if(!success) {
-			glGetShaderInfoLog(this->id, 512, NULL, infoLog);
+			infoLog = (char*) malloc(GL_INFO_LOG_LENGTH);
+			glGetShaderInfoLog(this->id, GL_INFO_LOG_LENGTH, nullptr, infoLog);
 			std::cerr << "Failed to compile shader: " << infoLog << "\n";
+			delete infoLog;
 		}
 	} else {
 		std::cerr << "Couldn't open shader file: " << filePath << "\n";
 	}
+}
+
+int Shader::getID() const {
+	return this->id;
 }
