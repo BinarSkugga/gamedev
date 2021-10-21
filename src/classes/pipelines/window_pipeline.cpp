@@ -13,14 +13,17 @@
 
 void WindowPipeline::processObject(Window* const window) {
 	GLFWwindow* glwin = window->getGLFW();
+	window->subscribe("f12");
 
 	InputPipeline ipl = InputPipeline(glwin);
 	ipl.add({
 			        new Key(glwin, GLFW_KEY_W),
 			        new Key(glwin, GLFW_KEY_A),
 			        new Key(glwin, GLFW_KEY_S),
-			        new Key(glwin, GLFW_KEY_D)
+			        new Key(glwin, GLFW_KEY_D),
+					new Key(glwin, GLFW_KEY_F12)
 	        });
+	ipl.bus.addSubscriber(window);
 
 	Clock clock = Clock();
 	clock.subscribe("scroll");
@@ -29,20 +32,19 @@ void WindowPipeline::processObject(Window* const window) {
 	ShaderProgram mainProgram = ShaderProgram("main");
 
 	float initialAngle = 90.0f;
-	int pointCount = 120;
+	int pointCount = 25;
 	float angleStep = 360.0f / pointCount;
 	float radius = 0.5f;
 
 	float vertices[3 * pointCount];
 	for(int i = 0; i < pointCount; i++) {
 		float currentAngle = initialAngle - (i * angleStep);
-		std::cout << currentAngle << "\n";
 		int carret = 3 * i;
 		vertices[carret] = radius * cos(currentAngle * M_PI / 180);
 		vertices[carret + 1] = radius * sin(currentAngle * M_PI / 180);
 		vertices[carret + 2] = 0.0f;
 
-		std::cout << std::fixed << vertices[carret] << ", " << vertices[carret + 1] << ", " << vertices[carret + 2] << "\n";
+		// std::cout << std::fixed << vertices[carret] << ", " << vertices[carret + 1] << ", " << vertices[carret + 2] << "\n";
 	}
 
 	unsigned int indices[3 * (pointCount - 2)];
@@ -59,7 +61,7 @@ void WindowPipeline::processObject(Window* const window) {
 			indices[carret + 2] = i;
 		}
 
-		std::cout << indices[3 * i] << ", " << indices[(3 * i) + 1] << ", " << indices[(3 * i) + 2] << "\n";
+		// std::cout << indices[3 * i] << ", " << indices[(3 * i) + 1] << ", " << indices[(3 * i) + 2] << "\n";
 	}
 
 	unsigned int vao;

@@ -45,14 +45,26 @@ void Window::init() {
 	glewExperimental = true;
 	glewInit();
 
-	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
 //	glfwSetInputMode(this->window, GLFW_STICKY_MOUSE_BUTTONS, GLFW_TRUE);
 //	glfwSetInputMode(this->window, GLFW_STICKY_KEYS, GLFW_TRUE);
 }
 
 void Window::clean() {
 
+}
+
+void Window::handle(Message<Key>* const message) {
+	Key* key = message->getData();
+
+	if(key->getCode() == GLFW_KEY_F12) {
+		GLint polygonMode;
+		glGetIntegerv(GL_POLYGON_MODE, &polygonMode);
+
+		if(polygonMode == GL_LINE)
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		else
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
 }
 
 Window::~Window() {

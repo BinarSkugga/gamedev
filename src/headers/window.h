@@ -1,10 +1,12 @@
 #pragma once
 
+#include <bus/bus_subscriber.h>
 #include "GLFW/glfw3.h"
 
 #include "gl_object.h"
+#include "key.h"
 
-class Window : public GLObject {
+class Window : public GLObject, public BusSubscriber<Key> {
 	private:
 		int width{1280}, height{720};
 		const char* title;
@@ -21,4 +23,6 @@ class Window : public GLObject {
 
 		void init() override;
 		void clean() override;
+
+		void handle(Message<Key>* const message);
 };
