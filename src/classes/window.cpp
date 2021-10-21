@@ -45,6 +45,8 @@ void Window::init() {
 	glewExperimental = true;
 	glewInit();
 
+	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
 //	glfwSetInputMode(this->window, GLFW_STICKY_MOUSE_BUTTONS, GLFW_TRUE);
 //	glfwSetInputMode(this->window, GLFW_STICKY_KEYS, GLFW_TRUE);
 }
