@@ -18,5 +18,5 @@ file(COPY ${shaders} DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/shaders")
 
 include_directories(${OPENGL_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} GLFW ${SRC}/headers)
 
-add_executable(gamedev ${classes} ${shaders})
+add_executable(gamedev ${classes} ${shaders} src/classes/geometry/polygon.cpp src/headers/geometry/polygon.h src/headers/geometry/gl_graphic_buffer.h src/classes/geometry/gl_graphic_buffer.cpp src/classes/geometry/vertex_array.cpp src/headers/geometry/vertex_array.h)
 target_link_libraries(gamedev ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES} glfw tbb)

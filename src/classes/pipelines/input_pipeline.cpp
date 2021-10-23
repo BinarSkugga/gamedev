@@ -19,7 +19,7 @@ void InputPipeline::processObject(Key* const key) {
 		this->bus.send(Message<Key>("scroll", key));
 	}
 
-	if(key->getCode() == GLFW_KEY_F12 and key->isReleased()) {
+	if(key->getCode() == GLFW_KEY_F12 and key->isPressed()) {
 		this->bus.send(Message<Key>("f12", key));
 	}
 }

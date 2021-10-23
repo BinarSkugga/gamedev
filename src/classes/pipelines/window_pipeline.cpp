@@ -2,6 +2,8 @@
 #include <iostream>
 #include <cmath>
 #include <shader/shader_program.h>
+#include <geometry/gl_graphic_buffer.h>
+#include <geometry/vertex_array.h>
 #include "window.h"
 #include "clock.h"
 #include "GLFW/glfw3.h"
@@ -34,7 +36,7 @@ void WindowPipeline::processObject(Window* const window) {
 	float initialAngle = 90.0f;
 	int pointCount = 25;
 	float angleStep = 360.0f / pointCount;
-	float radius = 0.5f;
+	float radius = 0.2f;
 
 	float vertices[3 * pointCount];
 	for(int i = 0; i < pointCount; i++) {
@@ -64,22 +66,9 @@ void WindowPipeline::processObject(Window* const window) {
 		// std::cout << indices[3 * i] << ", " << indices[(3 * i) + 1] << ", " << indices[(3 * i) + 2] << "\n";
 	}
 
-	unsigned int vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
-	unsigned int vbo;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	unsigned int ebo;
-	glGenBuffers(1, &ebo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
-	glEnableVertexAttribArray(0);
+	std::vector<int> vector_indices(indices, *(&indices + 1));
+	std::vector<float> vector_vertices(vertices, *(&vertices + 1));
+	VertexArray v_array = VertexArray(&vector_indices, &vector_vertices);
 
 	while(!glfwWindowShouldClose(glwin)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -87,9 +76,7 @@ void WindowPipeline::processObject(Window* const window) {
 		// START RENDER HERE
 
 		mainProgram.init();
-		glBindVertexArray(vao);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-		glDrawElements(GL_TRIANGLES, (pointCount - 2) * 3, GL_UNSIGNED_INT, nullptr);
+		v_array.init();
 
 		// END RENDER HERE
 
